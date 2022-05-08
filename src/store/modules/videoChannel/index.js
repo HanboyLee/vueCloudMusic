@@ -74,7 +74,7 @@ const actions = {
       const groupVideo = await Api.getVideoGroup(state.groupQueryInfo);
       commit(Types.SET_VIDEO_GROUP, groupVideo);
     } catch (error) {
-      console.log(error, Types.FETCH_VIDEO_INIT);
+      console.log(error, Types.FETCH_VIDEO_GROUP);
     }
   },
   async [Types.FETCH_VIDEO_DETAIL]({ commit }, params) {

@@ -1,0 +1,13 @@
+$color-dark:#000;
+
+@forward "element-plus/theme-chalk/src/common/var.scss" with (
+  $colors: (
+    "primary": (
+      "base": #3e53af,
+    ),
+  ),
+  // $font-path: "element-plus/dist/fonts" //加上這行
+);
+
+@import "element-plus/theme-chalk/src/index.scss";
+

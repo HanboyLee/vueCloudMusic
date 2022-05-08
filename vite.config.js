@@ -16,20 +16,20 @@ export default defineConfig({
         additionalData: `'@import "./src/assets/elementVariables.scss";'`,
       },
     },
-    postcss: {
-      plugins: [
-        {
-          postcssPlugin: "internal:charset-removal",
-          AtRule: {
-            charset: (atRule) => {
-              if (atRule.name === "charset") {
-                atRule.remove();
-              }
-            },
-          },
-        },
-      ],
-    },
+    // postcss: {
+    //   plugins: [
+    //     {
+    //       postcssPlugin: "internal:charset-removal",
+    //       AtRule: {
+    //         charset: (atRule) => {
+    //           if (atRule.name === "charset") {
+    //             atRule.remove();
+    //           }
+    //         },
+    //       },
+    //     },
+    //   ],
+    // },
   },
 
   plugins: [

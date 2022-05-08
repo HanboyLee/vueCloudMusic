@@ -12,11 +12,15 @@ import { search } from "./modules/search";
 import { userInfo } from "./modules/userInfo";
 import createPersistedState from "vuex-persistedstate";
 
-//數據持久話
+//數據持久化
 const persisted = createPersistedState({
   storage: window.sessionStorage,
   paths: ["player", "userInfo"],
 });
+
+const logger = process.env.NODE_ENV === "development" ? createLogger() : "";
+const plugins = [persisted].concat(logger).filter((item) => item);
+
 export const store = createStore({
   modules: {
     discover,
@@ -31,5 +35,5 @@ export const store = createStore({
     search,
     userInfo,
   },
-  plugins: [createLogger(), persisted],
+  plugins,
 });

@@ -1,9 +1,10 @@
 import request from "../request";
 
 /**
- * Singer
+ * @歌手分类列表
+ * @param {*} param0
+ * @description 说明 : 调用此接口,可获取歌手分类列表
  */
-//歌手分类列表
 export const getSingerList = async ({
   type,
   area,

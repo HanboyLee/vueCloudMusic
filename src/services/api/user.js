@@ -34,8 +34,8 @@ export const getUserSubcount = () => request.get("/api/user/subcount", {});
 
 /**
  * @name 获取用户歌单
-   @param {uid } 必选参数 : uid : 用户 id
-   @param {type } 可选参数 : type : type=1 时只返回 weekData, type=0 时返回 allData
+   @param {number }uid 必选参数 : uid : 用户 id
+   @param {number }type 可选参数 : type : type=1 时只返回 weekData, type=0 时返回 allData
  * @description 说明 : 登录后调用此接口 , 传入用户 id, 可以获取用户歌单
  */
 export const getUserRecord = ({ uid, type }) =>
@@ -48,9 +48,9 @@ export const getUserRecord = ({ uid, type }) =>
 
 /**
  * @name 获取用户播放记录
-   @param {uid } 必选参数 : uid : 用户 id
-   @param {limit }  返回数量 , 默认为 30
-   @param {offset }  偏移数量，用于分页 , 如 :( 页数 -1)*30, 其中 30 为 limit 的值 , 默认为 0
+   @param {number }uid 必选参数 : uid : 用户 id
+   @param {number }limit  返回数量 , 默认为 30
+   @param {number }offset  偏移数量，用于分页 , 如 :( 页数 -1)*30, 其中 30 为 limit 的值 , 默认为 0
  * @description 说明 : 登录后调用此接口 , 传入用户 id, 可获取用户播放记录
  */
 export const getUserPlaylist = ({ uid, limit, offset }) =>

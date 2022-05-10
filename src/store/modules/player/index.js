@@ -54,6 +54,12 @@ const actions = {
       }
 
       const { data } = await Api.getSongUrl({ id: songItem.id });
+      const upDateSource = await Api.upDateSourceid({
+        id: songItem.id,
+        sourceid: songItem.al.id,
+        time: parseInt((songItem.dt / 1000).toFixed()),
+      });
+      console.log(upDateSource, "upDateSource");
       const originSongMap = Object.assign(
         {},
         { url: data[0].url },

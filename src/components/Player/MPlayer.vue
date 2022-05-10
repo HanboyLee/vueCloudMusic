@@ -359,7 +359,6 @@ watch(
 //監聽模式變化
 //----------------------------
 const onProgress = (e) => {
-  // console.log(e, "onProgress1");
   const songsLen = store.state.player.songs.length;
   if (!songsLen) {
     durationTime.value = 0;

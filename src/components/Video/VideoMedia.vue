@@ -22,5 +22,6 @@ defineProps({
 <style lang="scss">
 .video {
   width: 100%;
+  max-height: 500px;
 }
 </style>

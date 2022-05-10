@@ -43,6 +43,7 @@ export const getUserRecord = ({ uid, type }) =>
     params: {
       uid,
       type,
+      timeStamp: Date.now(),
     },
   });
 

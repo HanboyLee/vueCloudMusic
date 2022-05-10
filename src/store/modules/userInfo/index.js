@@ -93,7 +93,7 @@ const actions = {
       const playlist = await Api.getUserPlaylist(params);
       commit(Types.SET_USER_PLAYLIST, playlist);
     } catch (error) {
-      console.log(Types.SET_USER_DETAIL_LOADING, error);
+      console.log(Types.FETCH_USER_PLAYLIST, error);
     }
   },
 };

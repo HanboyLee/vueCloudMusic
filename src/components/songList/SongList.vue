@@ -58,6 +58,7 @@ defineProps({
 
 const store = useStore();
 function onCellClick({ row }) {
+  console.log(row);
   store.dispatch(Types.FETCH_SONG_ASYNC, row);
 }
 </script>

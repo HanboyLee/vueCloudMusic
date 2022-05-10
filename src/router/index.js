@@ -73,14 +73,15 @@ const router = createRouter({
           meta: {
             keepAlive: true,
           },
-          beforeEnter() {
+          beforeEnter(to, from, next) {
+            console.log(to, from, next);
             const sessionStore = JSON.parse(sessionStorage.getItem("vuex"));
             const isToken = !!sessionStore?.userInfo?.token;
             if (isToken) {
-              return true;
+              return next();
             } else {
               ElMessage.error({ message: "亲，请先登入，才可访问此页面。" });
-              return false;
+              return next("/");
             }
           },
         },
@@ -106,6 +107,16 @@ const router = createRouter({
           path: "/profile/:userId",
           name: "用户页面",
           component: () => import("@/views/User/UserProfile.vue"),
+          beforeEnter(to, from, next) {
+            console.log(to, from, next);
+            const sessionStore = JSON.parse(sessionStorage.getItem("vuex"));
+            const isToken = !!sessionStore?.userInfo?.token;
+            if (isToken) {
+              return next();
+            } else {
+              return next("/");
+            }
+          },
         },
       ],
     },

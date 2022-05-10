@@ -14,6 +14,8 @@
       :publishTime="album.artist.publishTime"
       :description="album.description"
       :songs="songs"
+      :id="route.params.detailId"
+      disableCollection
     >
       <template #albumTitle>
         <h4 class="text-xl font-bold py-3">专辑介绍:</h4>

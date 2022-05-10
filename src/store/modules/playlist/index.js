@@ -85,6 +85,14 @@ const actions = {
     });
     commit(Types.SET_PLAYLISTS_LOADING, false);
   },
+  async [Types.FETCH_PLAYLIST_SUBCRIBE_ASYNC]({ commit }, params) {
+    try {
+      const datas = await Api.updatePlayListSubscribe(params);
+      console.log(datas, Types.FETCH_PLAYLIST_SUBCRIBE_ASYNC);
+    } catch (error) {
+      console.log(error, Types.FETCH_PLAYLIST_SUBCRIBE_ASYNC);
+    }
+  },
 };
 
 export const playlist = {

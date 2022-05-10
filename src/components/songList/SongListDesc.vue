@@ -31,8 +31,16 @@
         <span>发行公司：</span>
         <span>{{ company }}</span>
       </div>
-      <div class="mt-4">
+      <div class="flex items-center gap-4 mt-4">
+        <!-- 播放全部 -->
         <PlaySongsButton :songs="songs" />
+        <!-- 收藏 -->
+        <CollectionButton
+          v-if="!disableCollection"
+          :id="id"
+          :isCollection="isCollection"
+          :collectionType="collectionType"
+        />
       </div>
     </div>
   </div>
@@ -56,7 +64,11 @@ import { ref } from "vue-demi";
 //components
 import SongList from "@/components/songList/SongList.vue";
 import PlaySongsButton from "@/components/button/PlaySongsButton.vue";
+import CollectionButton from "@/components/button/CollectionButton.vue";
 defineProps({
+  id: {
+    type: [Number, String],
+  },
   blurPicUrl: {
     type: String,
   },
@@ -90,6 +102,15 @@ defineProps({
   disabledLineClamp: {
     type: Boolean,
     default: false,
+  },
+  isCollection: {
+    type: Boolean,
+  },
+  collectionType: {
+    type: String,
+  },
+  disableCollection: {
+    type: Boolean,
   },
 });
 const isExtendText = ref(true);

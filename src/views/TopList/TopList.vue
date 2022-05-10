@@ -39,6 +39,7 @@
         :songs="topListDetail.tracks"
         :trackIds="topListDetail.trackIds"
         disabledLineClamp
+        disableCollection
       />
 
       <div>

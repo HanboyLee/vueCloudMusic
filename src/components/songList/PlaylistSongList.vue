@@ -6,6 +6,7 @@
   <div v-else class="flex">
     <div class="flex-1 w-">
       <SongListDesc
+        :id="route.params.detailId"
         :blurPicUrl="playlistInfo.coverImgUrl"
         :name="playlistInfo.name"
         :artistImg1v1Url="playlistInfo.creator.avatarUrl"
@@ -13,6 +14,8 @@
         :publishTime="playlistInfo.createTime"
         :description="playlistInfo.description"
         :songs="songs"
+        :isCollection="playlistInfo.subscribed"
+        :collectionType="Types.FETCH_PLAYLIST_SUBCRIBE_ASYNC"
       >
         <template #tag v-if="playlistInfo.tags.length">
           <div class="flex items-center">
@@ -59,20 +62,22 @@
         <CommonSlotCard>
           <template #title>喜欢这个歌单的人</template>
           <template #content>
-            <div class="mt-4 flex gap-6 p-4 flex-wrap justify-around">
-              <el-tooltip
-                :content="subscriber.nickname"
-                placement="top"
+            <ElRow justify="center" class="p-4 text-center">
+              <ElCol
+                class="pt-4"
                 :key="subscriber.id"
+                :span="6"
                 v-for="subscriber in playlistInfo.subscribers"
               >
-                <ElAvatar
-                  shape="square"
-                  :src="subscriber.avatarUrl"
-                  :alt="subscriber.nickname"
-                />
-              </el-tooltip>
-            </div>
+                <el-tooltip :content="subscriber.nickname" placement="top">
+                  <ElAvatar
+                    shape="square"
+                    :src="subscriber.avatarUrl"
+                    :alt="subscriber.nickname"
+                  />
+                </el-tooltip>
+              </ElCol>
+            </ElRow>
           </template>
         </CommonSlotCard>
       </div>
@@ -170,6 +175,7 @@ const onPageChange = (curPage) => {
 onBeforeMount(() => {
   store.dispatch(Types.FETCH_PLAYLIST_DETAIL_ASYNC, {
     id: route.params.detailId,
+    timeStamp: Date.now(),
   });
   store.dispatch(Types.FETCH_COMMENT_PLAYLIST, {
     id: route.params.detailId,

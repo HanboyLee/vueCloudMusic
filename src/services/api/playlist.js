@@ -41,10 +41,11 @@ export const getPlaylists = ({ order, cat, limit, offset }) =>
  * @description 说明 : 歌单能看到歌单名字, 但看不到具体歌单内容 , 调用此接口 , 传入歌单 id, 可 以获取对应歌单内的所有的音乐(未登录状态只能获取不完整的歌单,登录后是完整的)，但是返回的 trackIds 是完整的，tracks 则是不完整的，可拿全部 trackIds 请求一次 song/detail 接口获取所有歌曲的详情 (https://github.com/Binaryify/NeteaseCloudMusicApi/issues/452)
  * @example /playlist/detail?id=24381616
  */
-export const getPlayListDetail = ({ id }) =>
+export const getPlayListDetail = ({ id, timeStamp }) =>
   request.get("/api/playlist/detail", {
     params: {
       id,
+      timeStamp,
     },
   });
 
@@ -73,5 +74,21 @@ export const getPlayListRelated = ({ id }) =>
   request.get("/api/related/playlist", {
     params: {
       id,
+    },
+  });
+
+/**
+ * @name 收藏歌單
+ * @param {number}id 必选参数  歌单 id
+ * @param {number}t 必选参数  类型,1:收藏,2:取消
+ * @description 说明 : 调用此接口 , 传入类型和歌单 id 可收藏歌单或者取消收藏歌单
+ * @example /playlist/subscribe?t=1&id=106697785 /playlist/subscribe?t=2&id=106697785
+ */
+export const updatePlayListSubscribe = ({ id, t = 1 }) =>
+  request.get("/api/playlist/subscribe", {
+    params: {
+      id,
+      t,
+      timeStamp: Date.now(),
     },
   });

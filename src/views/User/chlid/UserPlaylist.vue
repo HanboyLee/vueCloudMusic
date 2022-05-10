@@ -4,9 +4,9 @@
       <slot name="title" />
       ({{ len }})
     </h1>
-    <ElRow :gutter="20">
+    <ElRow :gutter="30">
       <ElCol
-        class="cursor-pointer"
+        class="cursor-pointer my-8"
         :key="item.id"
         :span="4"
         v-for="item in datas"

@@ -51,13 +51,15 @@ export const getUserRecord = ({ uid, type }) =>
    @param {number }uid 必选参数 : uid : 用户 id
    @param {number }limit  返回数量 , 默认为 30
    @param {number }offset  偏移数量，用于分页 , 如 :( 页数 -1)*30, 其中 30 为 limit 的值 , 默认为 0
+   @param {number }timeStamp  不使用緩存資料
  * @description 说明 : 登录后调用此接口 , 传入用户 id, 可获取用户播放记录
  */
-export const getUserPlaylist = ({ uid, limit, offset }) =>
+export const getUserPlaylist = ({ uid, limit, offset, timeStamp }) =>
   request.get("/api/user/playlist", {
     params: {
       uid,
       limit,
       offset,
+      timeStamp,
     },
   });

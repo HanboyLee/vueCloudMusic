@@ -141,6 +141,7 @@ onBeforeMount(() => {
   store.dispatch(Types.FETCH_USER_PLAYLIST, {
     uid: route.params.userId,
     ...store.state.userInfo.userPlaylistQueryInfo,
+    timeStamp: Date.now(),
   });
 });
 

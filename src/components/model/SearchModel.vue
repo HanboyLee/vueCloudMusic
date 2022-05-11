@@ -62,7 +62,6 @@ const router = useRouter();
 const emit = defineEmits(["update:isOpenSearchModel"]);
 
 const appendTracker = (val) => {
-  console.log(val);
   router.push(`/search/${val}`);
   emit("update:isOpenSearchModel", false);
 };

@@ -71,7 +71,7 @@
 
     <!-- 最新ＭＶ -->
     <ElRow class="boxConatiner py-4">
-      <ElCol>
+      <ElCol class="p-4 m-4">
         <div class="flex items-center">
           <div
             @click="$router.push('/mvlatest')"

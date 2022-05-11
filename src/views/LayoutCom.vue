@@ -20,7 +20,9 @@
             <ElMenuItem index="/topList">排行榜</ElMenuItem>
             <ElMenuItem index="/singer">歌手</ElMenuItem>
             <ElMenuItem index="/mvlatest">ＭＶ</ElMenuItem>
-            <ElMenuItem index="/videoChannel">视频</ElMenuItem>
+            <ElMenuItem @click="onCheckLogin" index="/videoChannel"
+              >视频</ElMenuItem
+            >
           </ElMenu>
         </ElCol>
 
@@ -102,10 +104,20 @@ import ProfileModel from "@/components/model/ProfileModel.vue";
 import PlayerBar from "@/views/PlayerBar/PlayerBar.vue";
 import { ref } from "vue-demi";
 const isShowSubModel = ref(false);
-defineEmits(["update:isOpenSearchModel", "update:isOpenLoginModel"]);
+const emit = defineEmits([
+  "update:isOpenSearchModel",
+  "update:isOpenLoginModel",
+]);
 
 const onMouseEvent = (isShow) => {
   isShowSubModel.value = isShow;
+};
+const onCheckLogin = () => {
+  const sessionStore = JSON.parse(sessionStorage.getItem("vuex"));
+  const isNotLogin = !sessionStore.userInfo.token;
+  if (isNotLogin) {
+    emit("update:isOpenLoginModel", true);
+  }
 };
 </script>
 <style lang="scss" scoped>

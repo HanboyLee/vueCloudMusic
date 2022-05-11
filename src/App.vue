@@ -38,6 +38,7 @@ import LoginModel from "@/components/model/LoginModel.vue";
 const isOpenSearchModel = ref(false);
 const isOpenLoginModel = ref(false);
 const store = useStore();
+
 onBeforeMount(() => {
   store.dispatch(Types.FETCH_SEARCH_HOT_TAG_ASYNC);
 });

@@ -74,7 +74,6 @@ const router = createRouter({
             keepAlive: true,
           },
           beforeEnter(to, from, next) {
-            console.log(to, from, next);
             const sessionStore = JSON.parse(sessionStorage.getItem("vuex"));
             const isToken = !!sessionStore?.userInfo?.token;
             if (isToken) {
@@ -108,7 +107,6 @@ const router = createRouter({
           name: "用户页面",
           component: () => import("@/views/User/UserProfile.vue"),
           beforeEnter(to, from, next) {
-            console.log(to, from, next);
             const sessionStore = JSON.parse(sessionStorage.getItem("vuex"));
             const isToken = !!sessionStore?.userInfo?.token;
             if (isToken) {

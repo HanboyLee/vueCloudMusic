@@ -38,15 +38,16 @@
           <div class="text-gray-500">
             {{ $moment(comment.time).format("ll") }}
           </div>
-          <div>
+          <div v-if="!!$store.state.userInfo.token">
             <span class="pr-3">
               <i
                 class="text-xl iconfont icon-good-fill align-middle cursor-pointer"
-                :class="[{ ['text-blue-300']: comment.liked }]"
+                :style="comment.liked && { color: `rgb(147 197 253)` }"
+                @click="onLike"
               ></i>
               <span>({{ comment.likedCount }})</span>
             </span>
-            <span v-if="!!$store.state.userInfo.token">
+            <span>
               |
               <span
                 @click="onShowReply"
@@ -73,9 +74,14 @@
 </template>
 <script setup>
 import { ref } from "vue-demi";
+import { useStore } from "vuex";
+import Types from "@/store/types";
+//components
 import CommentPost from "./CommentPost.vue";
 const isShowReplyComment = ref(false);
-defineProps({
+
+const store = useStore();
+const props = defineProps({
   comment: {
     type: Object,
   },
@@ -88,6 +94,16 @@ defineProps({
     require: true,
   },
 });
+const onLike = async () => {
+  console.log(!props.comment.liked ? 1 : 0, "props.comment.liked ");
+  const params = {
+    id: props.replyDatas.id,
+    cid: props.comment.commentId,
+    t: !props.comment.liked ? 1 : 0,
+    type: props.replyDatas.type,
+  };
+  store.dispatch(Types.FETCH_COMMENT_LIKE, params);
+};
 
 const onCloseReply = () => (isShowReplyComment.value = false);
 const onShowReply = () =>

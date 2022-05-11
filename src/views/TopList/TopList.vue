@@ -95,15 +95,24 @@ onBeforeMount(() => {
 //監聽點擊排行榜
 watch(selectedCurId, (cur) => {
   store.dispatch(Types.FETCH_TOPLIST_PLAYLIST_DETAIL, { id: cur });
+  store.dispatch(Types.FETCH_COMMENT_PLAYLIST, {
+    id: cur ?? store.state.topList?.topListDetail?.id,
+    limit: 20,
+    offset: 0,
+  });
 });
 
 //監聽評論區換頁
 watch(
-  [selectedCurId, () => store.state.comment.commentPlaylist.queryInfo],
-  (curQueryInfo) => {
+  [
+    () => store.state.comment.commentPlaylist.queryInfo,
+    () => store.state.comment.likedstate,
+  ],
+  ([curQueryInfo, curLikedstate]) => {
     store.dispatch(Types.FETCH_COMMENT_PLAYLIST, {
-      id: curQueryInfo[0] ?? store.state.topList?.topListDetail?.id,
-      ...curQueryInfo[1],
+      id: selectedCurId.value ?? store.state.topList?.topListDetail?.id,
+      ...curQueryInfo,
+      timestamp: Date.now() + curLikedstate,
     });
   },
   { deep: true }

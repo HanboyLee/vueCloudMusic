@@ -56,7 +56,7 @@
 import { ref, watch } from "vue-demi";
 import CommentItem from "@/components/comment/CommentItem.vue";
 import CommentPost from "@/components/comment/CommentPost.vue";
-defineProps({
+const props = defineProps({
   commentCount: {
     type: Number,
   },
@@ -85,6 +85,16 @@ defineProps({
 const emit = defineEmits(["onPageChange"]);
 
 const curCommentPage = ref(1);
+//與上一個id值不同時 執行page 初始化
+watch(
+  () => props.replyDatas.id,
+  (cur, old) => {
+    if (old !== cur) {
+      curCommentPage.value = 1;
+    }
+  }
+);
+
 watch(
   () => curCommentPage.value,
   (cur) => {

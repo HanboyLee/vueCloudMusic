@@ -129,9 +129,16 @@ onBeforeMount(() => {
 });
 
 watch(
-  () => store.state.comment.commentMv.queryInfo,
-  (cur) => {
-    store.dispatch(Types.FETCH_COMMENT_MV, { id: route.params.mvId, ...cur });
+  [
+    () => store.state.comment.commentMv.queryInfo,
+    () => store.state.comment.likedstate,
+  ],
+  ([curQueryInfo, curLikeState]) => {
+    store.dispatch(Types.FETCH_COMMENT_MV, {
+      id: route.params.mvId,
+      ...curQueryInfo,
+      timestamp: Date.now() + curLikeState,
+    });
   },
   {
     deep: true,

@@ -28,6 +28,7 @@ const state = {
     },
     loading: false,
   },
+  likedstate: 0,
 };
 const getters = {};
 
@@ -65,6 +66,9 @@ const mutations = {
   [Types.SET_COMMENT_PLAYLIST_REFRESH](state, payload) {
     state.commentPlaylist.queryInfo.timestamp = payload.comment.time;
   },
+  [Types.SET_COMMENT_LIKE_STATE](state) {
+    state.likedstate += 1;
+  },
 };
 
 const actions = {
@@ -95,10 +99,19 @@ const actions = {
   async [Types.FETCH_COMMENT_CURRENT]({ commit }, { refreshType, ...params }) {
     try {
       const datas = await Api.getCommentCurrent(params);
-      console.log(datas, "datas", params);
       commit(refreshType, datas);
     } catch (error) {
       console.log(Types.FETCH_COMMENT_CURRENT, error);
+    }
+  },
+
+  async [Types.FETCH_COMMENT_LIKE]({ commit }, params) {
+    try {
+      const datas = await Api.updateCommentLike(params);
+      commit(Types.SET_COMMENT_LIKE_STATE);
+      console.log(datas, Types.SET_COMMENT_LIKE_STATE);
+    } catch (error) {
+      console.log(Types.FETCH_COMMENT_LIKE, error);
     }
   },
 };

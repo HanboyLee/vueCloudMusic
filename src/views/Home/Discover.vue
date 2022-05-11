@@ -3,6 +3,7 @@
     :loading="$store.state.discover.loading"
     v-if="$store.state.discover.loading"
   ></SkeletonGlobalLoading>
+
   <div v-else class="container">
     <!-- 輪播圖 -->
     <Carosel :banners="state.banners" />
@@ -111,6 +112,7 @@ import ImageCard from "@/components/cards/ImageCard.vue";
 import SongCard from "@/components/cards/SongCard.vue";
 import VideoCard from "@/components/cards/VideoCard.vue";
 import SkeletonGlobalLoading from "@/components/Skeleton/SkeletonGlobalLoading.vue";
+
 const store = useStore();
 const router = useRouter();
 const state = computed(() => store.state.discover);

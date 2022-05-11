@@ -131,11 +131,15 @@ onBeforeMount(() => {
 });
 
 watch(
-  () => store.state.comment.commentVideo.queryInfo,
-  (cur) => {
+  [
+    () => store.state.comment.commentVideo.queryInfo,
+    () => store.state.comment.likedstate,
+  ],
+  ([curQueryInfo, curLikeState]) => {
     store.dispatch(Types.FETCH_COMMENT_VIDEO, {
       id: route.params.videoId,
-      ...cur,
+      ...curQueryInfo,
+      timestamp: Date.now() + curLikeState,
     });
   },
   {

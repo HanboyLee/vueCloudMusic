@@ -78,3 +78,23 @@ export const getCommentCurrent = ({ t, type, id, content, commentId }) => {
     params,
   });
 };
+/**
+ * @name 发送/删除评论
+ * @param {number}id 必选参数 资源 id, 如歌曲 id,mv id
+ * @param {number}cid 评论 id
+ * @param {number}t必选参数 是否点赞 , 1 为点赞 ,0 为取消点赞
+ * @param {string}type必选参数  数字 , 资源类型 , 对应歌曲 , mv, 专辑 , 歌单 , 电台, 视频对应以下类型
+ * 0!: 歌曲 1!: mv 2!: 歌单 3!: 专辑 4: 电台 5!: 视频 6: 动态
+ * @description 说明 : 调用此接口 , 传入 type, 资源 id, 和评论 id cid 和 是否点赞参数 t 即可给对 应评论点赞 ( 需要登录 )
+ * @example 调用例子 : /comment/like?id=29178366&cid=12840183&t=1&type=0 对应给 https://music.163.com/#/song?id=29178366 最热门的评论点赞
+ */
+export const updateCommentLike = ({ t, type, id, cid }) => {
+  return request.get("/api/comment/like", {
+    params: {
+      t,
+      type,
+      id,
+      cid,
+    },
+  });
+};

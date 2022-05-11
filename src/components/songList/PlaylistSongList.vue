@@ -81,7 +81,6 @@
           </template>
         </CommonSlotCard>
       </div>
-
       <div>
         <CommonSlotCard>
           <template #title>相关推荐 </template>
@@ -120,7 +119,7 @@
   </div>
 </template>
 <script setup>
-import { computed, onBeforeMount, onUnmounted, watch } from "vue-demi";
+import { computed, onBeforeMount, onUnmounted, ref, watch } from "vue-demi";
 import TagItem from "@/components/tag/TagItem.vue";
 import { useRoute, useRouter } from "vue-router";
 import { useStore } from "vuex";
@@ -154,13 +153,18 @@ const replyDatas = computed(() => {
     type: 2,
   };
 });
+
 //監聽評論區換頁
 watch(
-  () => store.state.comment.commentPlaylist.queryInfo,
-  (curQueryInfo) => {
+  [
+    () => store.state.comment.commentPlaylist.queryInfo,
+    () => store.state.comment.likedstate,
+  ],
+  ([curQueryInfo, curLikeState]) => {
     store.dispatch(Types.FETCH_COMMENT_PLAYLIST, {
       id: route.params.detailId,
       ...curQueryInfo,
+      timestamp: Date.now() + curLikeState,
     });
   },
   { deep: true }

@@ -1,7 +1,7 @@
 <template>
   <audio
     ref="instance"
-    preload="none"
+    preload="auto"
     @progress="onProgress"
     @playing="audioReady"
     @error="audioError"
@@ -164,6 +164,7 @@ const initAudio = () => {
   currentSong.value = song;
   instance.value.load();
 };
+
 //初始化
 onMounted(() => {
   try {
@@ -422,7 +423,9 @@ const audioEnd = () => {
 };
 
 const audioError = () => {
+  //播放出問題
   store.commit(Types.DEL_SONG, { id: currentSong.value.id });
+  console.log("播放出問題");
 };
 //監聽播放時間
 const updateTime = (e) => {

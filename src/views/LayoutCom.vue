@@ -8,7 +8,7 @@
             @click="$router.push('/')"
           ></i
         ></ElCol>
-        <ElCol :span="15">
+        <ElCol :span="16">
           <ElMenu
             :default-active="$route.path"
             mode="horizontal"
@@ -23,6 +23,13 @@
             <ElMenuItem @click="onCheckLogin" index="/videoChannel"
               >视频</ElMenuItem
             >
+            <ElMenuItem index="/github"
+              ><a
+                target="_blank"
+                href="https://github.com/HanboyLee/vueCloudMusic"
+                >GITHUB</a
+              >
+            </ElMenuItem>
           </ElMenu>
         </ElCol>
 

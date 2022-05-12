@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isShowLyric" class="lyricContent">
+  <div ref="lyricRef" v-show="isShowLyric" class="lyricContent">
     <div class="lyrics" :key="key" v-for="(item, key) in lyricsShow">
       {{ item.txt }}
     </div>
@@ -51,11 +51,12 @@ const lyricsShow = vue.computed(() => {
   right: 0;
   text-align: center;
   width: 80%;
-  height: auto;
+  max-height: 300px;
   margin: 0 auto;
   border-radius: 5px 5px 0 0;
   background-color: rgba($color: #000000, $alpha: 0.1);
   overflow: hidden;
+
   & > div {
     padding: 0.5rem 0;
   }

@@ -26,7 +26,7 @@
 
 <script setup>
 import { RouterView } from "vue-router";
-import { onBeforeMount, ref } from "vue-demi";
+import { onBeforeMount, ref, provide } from "vue-demi";
 
 import { useStore } from "vuex";
 import Types from "./store/types";
@@ -38,6 +38,7 @@ import LoginModel from "@/components/model/LoginModel.vue";
 const isOpenSearchModel = ref(false);
 const isOpenLoginModel = ref(false);
 const store = useStore();
+provide("isOpenLoginModel", isOpenLoginModel);
 
 onBeforeMount(() => {
   store.dispatch(Types.FETCH_SEARCH_HOT_TAG_ASYNC);

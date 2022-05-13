@@ -23,7 +23,7 @@
             <ElMenuItem @click="onCheckLogin" index="/videoChannel"
               >视频</ElMenuItem
             >
-            <ElMenuItem index="/github"
+            <ElMenuItem index="/"
               ><a
                 target="_blank"
                 href="https://github.com/HanboyLee/vueCloudMusic"
@@ -107,10 +107,14 @@
 </template>
 <script setup>
 import { ArrowDown, ArrowUp } from "@element-plus/icons-vue";
+import { ref } from "vue-demi";
+//components
 import ProfileModel from "@/components/model/ProfileModel.vue";
 import PlayerBar from "@/views/PlayerBar/PlayerBar.vue";
-import { ref } from "vue-demi";
+//hooks
+import { useIsLoginState } from "@/hooks/useIsLoginState";
 const isShowSubModel = ref(false);
+const isLoginState = useIsLoginState();
 const emit = defineEmits([
   "update:isOpenSearchModel",
   "update:isOpenLoginModel",
@@ -120,9 +124,7 @@ const onMouseEvent = (isShow) => {
   isShowSubModel.value = isShow;
 };
 const onCheckLogin = () => {
-  const sessionStore = JSON.parse(sessionStorage.getItem("vuex"));
-  const isNotLogin = !sessionStore.userInfo.token;
-  if (isNotLogin) {
+  if (!isLoginState) {
     emit("update:isOpenLoginModel", true);
   }
 };
